@@ -1,61 +1,117 @@
-# Intern Portal — local setup
+# Online Internship Portal
 
-This repository contains a backend (Express + MySQL) and a frontend (React + Vite).
+A complete internship management system.
 
-Quick steps to get the project running locally:
+- **Backend:** Node.js (Express) + MySQL  
+- **Frontend:** React + Vite  
+- **Database:** SQL schema with tables, seed data, stored procedures, functions & triggers
 
-1. Import the database (creates schema, seed data, procedures, functions and triggers)
+---
 
-- If you have MySQL CLI available and your root password is `123456` (as on this machine), open PowerShell and run:
+## Project structure
+
+Online-internship-portal/
+├── backend/
+├── frontend/
+├── database/
+│ └── database.sql
+└── README.md
+
+yaml
+Copy code
+
+---
+
+## Requirements
+
+- Node.js (v16+ recommended)
+- npm (comes with Node.js)
+- MySQL server (with access to CLI or MySQL Workbench)
+- (Windows) PowerShell if using the provided import helper
+
+---
+
+## 1. Import the MySQL database
+
+The SQL file includes schema, sample data, procedures, functions, and triggers. Use **one** of the options below.
+
+### Option A — PowerShell helper (recommended)
+If you use the default local setup (example root password `123456` on this machine):
 
 ```powershell
-cd C:\Users\arnav\OneDrive\Desktop\intern-portal\backend
+cd C:\Users\arnav\OneDrive\Desktop\Online-internship-portal\backend
 .\import-db.ps1
-```
+This script runs database/database.sql and creates the intern database.
 
-This will run the SQL file located at `database/database.sql` and create the `intern` database with all procedures and triggers.
+Note: Update the PowerShell script or environment credentials if your MySQL password differs.
 
-If you prefer to use MySQL Workbench, open `database/database.sql` and run the script inside Workbench.
+Option B — MySQL Workbench (GUI)
+Open MySQL Workbench
 
-- Or (alternative) run the Node helper from the `backend` folder which calls the `mysql` CLI (reads credentials from `backend/.env`):
+File → Open SQL Script → select database/database.sql
 
-```powershell
-cd 'C:\Users\arnav\OneDrive\Desktop\intern-portal\backend'
+Click Run to execute the script
+
+Option C — Node helper (uses MySQL CLI)
+Requires the mysql CLI installed and available in your system PATH:
+
+powershell
+Copy code
+cd C:\Users\arnav\OneDrive\Desktop\Online-internship-portal\backend
 npm run import-db
-```
+This command reads DB credentials from backend/.env and executes the SQL file.
 
-This requires the `mysql` CLI installed and in PATH. The helper is more robust than trying to parse DELIMITER statements in JS.
+2. Start the backend (Express + MySQL)
+Open terminal / PowerShell
 
-2. Start the backend
+Install dependencies and start:
 
-```powershell
-cd C:\Users\arnav\OneDrive\Desktop\intern-portal\backend
+powershell
+Copy code
+cd C:\Users\arnav\OneDrive\Desktop\Online-internship-portal\backend
 npm install
 npm run dev
-```
+The backend listens on the port set in backend/.env (default: 3001).
 
-Backend runs on port defined in `backend/.env` (default: 3001). Verify DB connection:
+Health / test endpoints
 
-- http://localhost:3001/ should return a simple status message.
-- http://localhost:3001/api/db-test checks DB connectivity.
+http://localhost:3001/ — backend status
 
-3. Start the frontend
+http://localhost:3001/api/db-test — DB connectivity test
 
-```powershell
-cd C:\Users\arnav\OneDrive\Desktop\intern-portal\frontend
+3. Start the frontend (React + Vite)
+Open a new terminal
+
+Install and start:
+
+powershell
+Copy code
+cd C:\Users\arnav\OneDrive\Desktop\Online-internship-portal\frontend
 npm install
 npm run dev
-```
+Open the app at: http://localhost:5173/ (Vite may use another port if 5173 is occupied).
 
-Open the app at http://localhost:5173/ (Vite may choose a nearby port if 5173 is busy).
+Environment files
+backend/.env — contains DB credentials and server port (example variables)
 
-Notes
-- The frontend now includes a fallback stylesheet link in `frontend/index.html` so styles are visible even before JS bundles load.
-- The backend controllers call MySQL stored procedures and functions defined in `database/database.sql`. Ensure you run the SQL import before using the frontend features.
+DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, PORT
 
-If you want, I can also:
-- Add a small Node.js script to import the SQL (instead of using the CLI),
-- Convert the UI to use Tailwind or a component library,
-- Add tests or demo data pages.
+Ensure these values are correct before starting the backend or using the import helper.
 
-Tell me which next step you'd like me to take (import DB now, run a test endpoint, or further improve UI).
+Do not commit your .env file to GitHub. Add it to .gitignore.
+
+Useful scripts
+Backend
+npm run dev — start backend in development mode
+
+npm run import-db — helper that runs database/database.sql via MySQL CLI (if configured)
+
+Frontend
+npm run dev — start Vite dev server
+
+Notes & tips
+The frontend relies on stored procedures and functions defined in database/database.sql. Import the DB first or API calls will fail.
+
+node_modules/ is intentionally excluded from the repository via .gitignore. Install dependencies locally with npm install.
+
+If you change DB schema or triggers, re-run the import (or apply changes manually) and restart the backend.
