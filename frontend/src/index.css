@@ -1,0 +1,214 @@
+/* App-wide variables and reset */
+:root {
+  --bg-1: linear-gradient(135deg,#0f172a 0%, #001219 100%);
+  --card-bg: rgba(255,255,255,0.04);
+  --accent: #7c5cff;
+  --muted: #9aa4b2;
+  --glass: rgba(255,255,255,0.04);
+  --radius: 12px;
+  --max-width: 1100px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html,body,#root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg-1);
+  color: #e6eef6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: var(--max-width);
+  padding: 2rem;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+.nav > div:first-child { margin-right: 8px; font-weight: 700; }
+.nav-links { display:flex; gap:1rem; align-items:center; }
+.nav a { color: #e6eef6; text-decoration: none; font-weight: 600; }
+.nav a:hover { color: var(--accent); }
+
+/* Cards and layout */
+.hero { display:flex; gap:1rem; align-items:center; justify-content:space-between; background: rgba(255,255,255,0.02); padding:1.25rem; border-radius: var(--radius); }
+.card { background: var(--card-bg); padding: 1.25rem; border-radius: 12px; box-shadow: 0 6px 18px rgba(2,6,23,0.6); }
+/* Horizontal list layout for Students, Companies, etc. */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.grid .card {
+  flex: 1 0 calc(25% - 1.25rem);
+  min-width: 240px;
+  max-width: 280px;
+}
+
+
+.lead { color: var(--muted); }
+
+/* Forms */
+.form { background: rgba(255,255,255,0.02); padding:1rem; border-radius:12px; }
+.form .form-row { display:flex; gap:0.75rem; flex-direction:column; margin-bottom:0.75rem; }
+.form input[type='text'], .form input[type='number'], .form input[type='date'], .form select, .form textarea {
+  width:100%; padding:0.6rem 0.75rem; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.25); color: inherit;
+}
+.form input, .form select, .form textarea, input[type='text'], input[type='number'], input[type='date'] {
+  min-width: 0;
+  width: 100%;
+  max-width: 720px;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color: inherit;
+  font-size: 0.95rem;
+}
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: flex-start;
+  align-items: stretch;
+  max-width: 100%;
+}
+
+.dashboard-card {
+  flex: 1 0 calc(33.33% - 1.25rem); /* 3 cards per row */
+  min-width: 260px;
+  max-width: 320px;
+}
+select {
+  background: rgba(255,255,255,0.06) !important;
+  color: white !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
+}
+
+select option {
+  background: #111827 !important;   /* dark background */
+  color: white !important;          /* readable text */
+  padding: 10px;
+}
+/* Navbar distribution: left brand, centered links, right action */
+.nav { display:flex; align-items:center; padding:0.6rem 1rem; background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border-radius:12px; margin-bottom:1.25rem; }
+.nav-left { flex: 0 0 auto; }
+.nav-center { flex: 1 1 auto; display:flex; justify-content:center; }
+.nav-right { flex: 0 0 auto; }
+.nav-center .nav-links { display:flex; gap:1.4rem; }
+.brand { font-weight:700; font-size:1.05rem; }
+.btn { background: linear-gradient(90deg,var(--accent), #5e7bff); color:white; padding:0.6rem 1rem; border-radius:8px; border: none; cursor:pointer; font-weight:600; }
+.btn:active { transform: translateY(1px); }
+
+/* utility-ish classes used in some pages */
+.p-10{ padding:2.5rem; }
+.text-3xl{ font-size:1.875rem; line-height:1.2; }
+.font-bold{ font-weight:700; }
+.mb-6{ margin-bottom:1.5rem; }
+.max-w-xl{ max-width:36rem; }
+.space-y-5 > * + *{ margin-top:1.25rem; }
+.w-full{ width:100%; }
+.border{ border:1px solid rgba(255,255,255,0.06); }
+.rounded{ border-radius:8px; }
+.shadow{ box-shadow: 0 8px 30px rgba(2,6,23,0.6); }
+.bg-white{ background: rgba(255,255,255,0.02); }
+.text-muted{ color: var(--muted); }
+
+pre { white-space: pre-wrap; text-align: left; background: rgba(0,0,0,0.25); padding: .75rem; border-radius:8px; overflow:auto; }
+
+@media (max-width: 640px){ .hero{ flex-direction: column; align-items: flex-start; } }
+/* ---------- Tools / Analytics pages layout ---------- */
+.tool-wrap {
+  max-width: 720px;
+}
+
+.tool-card {
+  background: rgba(255,255,255,0.04);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+}
+
+.tool-form {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* two columns when there is space */
+@media (min-width: 780px){
+  .tool-form--2 {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+  }
+}
+
+.tool-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tool-actions {
+  display: flex;
+  gap: .6rem;
+}
+
+.tool-result {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07); /* visible glass */
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff; /* ensure text is visible */
+  font-size: 1rem;
+}
+
+/* make form controls look consistent */
+.tool-wrap input,
+.tool-wrap select {
+  width: 100%;
+  padding: .7rem .85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
+  color: inherit;
+  outline: none;
+}
+
+.tool-wrap select option {
+  background: #0f172a;
+  color: #fff;
+}
+
+/* button */
+.btn {
+  background: linear-gradient(90deg, var(--accent), #5e7bff);
+  color: #fff;
+  padding: .65rem 1rem;
+  border: 0;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:active { transform: translateY(1px); }
+
+
