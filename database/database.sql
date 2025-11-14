@@ -837,3 +837,13 @@ ALTER TABLE Goodies
 MODIFY goodie_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
 
 
+ALTER TABLE Certificate
+ADD COLUMN status VARCHAR(20) DEFAULT 'Pending';
+
+ALTER TABLE Certificate DROP PRIMARY KEY;
+
+ALTER TABLE Certificate
+MODIFY certificate_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE Certificate
+ADD UNIQUE KEY unique_internship (internship_id);
