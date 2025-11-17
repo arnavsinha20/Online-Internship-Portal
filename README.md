@@ -16,7 +16,8 @@ Online-internship-portal/
 ├── frontend/
 ├── database/
 │   └── database.sql
-└── README.md
+|── README.md
+└── Report.pdf
 ```
 
 ---
